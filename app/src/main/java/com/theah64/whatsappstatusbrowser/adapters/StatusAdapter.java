@@ -81,6 +81,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
 
     public interface Callback {
         void onItemClicked(int position);
+
         void onSaveToGalleryClicked(int position);
     }
 }

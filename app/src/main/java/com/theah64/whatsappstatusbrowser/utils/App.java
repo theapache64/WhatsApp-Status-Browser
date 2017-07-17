@@ -10,6 +10,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.theah64.whatsappstatusbrowser.R;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 /**
  * Created by theapache64 on 16/7/17.
@@ -46,6 +49,12 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         initImageLoader(this);
+
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/Pacifico.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build()
+        );
     }
 
 }

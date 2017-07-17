@@ -12,7 +12,7 @@ import com.theah64.whatsappstatusbrowser.utils.PermissionUtils;
  * Created by theapache64 on 6/1/17.
  */
 
-public abstract class BasePermissionActivity extends AppCompatActivity implements PermissionUtils.Callback {
+public abstract class BasePermissionActivity extends BaseAppCompatActivity implements PermissionUtils.Callback {
 
     private static final String X = BasePermissionActivity.class.getSimpleName();
 
