@@ -36,7 +36,8 @@
             android:id="@+id/tvSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SubTitle" />
+            android:text="SubTitle"
+            android:textColor="@color/light_grey" />
 
     </LinearLayout>
 

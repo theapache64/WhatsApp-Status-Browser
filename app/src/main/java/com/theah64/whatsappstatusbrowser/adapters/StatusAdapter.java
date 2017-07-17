@@ -10,8 +10,10 @@ import android.widget.TextView;
 import com.theah64.whatsappstatusbrowser.R;
 import com.theah64.whatsappstatusbrowser.models.Status;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -20,6 +22,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder> {
+
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d MMM yyyy hh:mm aaa", Locale.getDefault());
 
     private final List<Status> statusList;
     private final LayoutInflater inflater;
@@ -41,7 +45,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         final Status status = statusList.get(position);
         holder.civThumbnail.setImageBitmap(status.getThumbnail());
         holder.tvTitle.setText(status.getTitle());
-        holder.tvSubTitle.setText(new Date(status.getFile().lastModified()).toString());
+        holder.tvSubTitle.setText(DATE_FORMAT.format(new Date(status.getFile().lastModified())));
     }
 
     @Override
