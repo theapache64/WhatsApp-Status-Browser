@@ -20,7 +20,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 /**
  * Created by theapache64 on 16/7/17.
  */
-
 public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder> {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("d MMM yyyy hh:mm aaa", Locale.getDefault());
@@ -28,9 +27,12 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     private final List<Status> statusList;
     private final LayoutInflater inflater;
 
-    public StatusAdapter(final Context context, List<Status> statusList) {
+    private final Callback callback;
+
+    public StatusAdapter(final Context context, List<Status> statusList, Callback callback) {
         this.statusList = statusList;
         this.inflater = LayoutInflater.from(context);
+        this.callback = callback;
     }
 
 
@@ -53,7 +55,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         return statusList.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final CircleImageView civThumbnail;
         private final TextView tvTitle, tvSubTitle;
 
@@ -62,6 +64,23 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
             this.civThumbnail = (CircleImageView) itemView.findViewById(R.id.civThumbnail);
             this.tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
             this.tvSubTitle = (TextView) itemView.findViewById(R.id.tvSubTitle);
+
+            itemView.setOnClickListener(this);
+            itemView.findViewById(R.id.ibSaveToGallery).setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.ibSaveToGallery) {
+                callback.onSaveToGalleryClicked(getLayoutPosition());
+            } else {
+                callback.onItemClicked(getLayoutPosition());
+            }
+        }
+    }
+
+    public interface Callback {
+        void onItemClicked(int position);
+        void onSaveToGalleryClicked(int position);
     }
 }
