@@ -4,11 +4,14 @@ package com.theah64.whatsappstatusbrowser.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.theah64.whatsappstatusbrowser.R;
+import com.theah64.whatsappstatusbrowser.adapters.StatusAdapter;
 import com.theah64.whatsappstatusbrowser.models.Status;
 import com.theah64.whatsappstatusbrowser.utils.StatusManager;
 
@@ -45,7 +48,11 @@ public abstract class BaseStatusesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statuses, container, false);
+        final View rootLayout = inflater.inflate(R.layout.fragment_statuses, container, false);
+        final RecyclerView rvStatuses = (RecyclerView) rootLayout.findViewById(R.id.rvStatuses);
+        rvStatuses.setLayoutManager(new LinearLayoutManager(getActivity()));
+        rvStatuses.setAdapter(new StatusAdapter(getActivity(), getStatuses()));
+        return rootLayout;
     }
 
 }

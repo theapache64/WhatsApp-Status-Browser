@@ -1,8 +1,9 @@
 package com.theah64.whatsappstatusbrowser.utils;
 
 import android.content.ContentResolver;
-import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.os.Environment;
 import android.provider.MediaStore;
 
@@ -19,25 +20,22 @@ import java.util.List;
 public class StatusManager {
 
     private static final File STATUS_DIRECTORY = new File(Environment.getExternalStorageDirectory() + File.separator + "WhatsApp/Media/.Statuses");
+    private static final int THUMBSIZE = 128;
     private List<Status> imageStatuses, videoStatus;
 
     public StatusManager(ContentResolver contentResolver) throws StatusException {
         genStatuses(contentResolver);
     }
 
-    private static Bitmap getThumbnail(ContentResolver cr, String path) {
-        Bitmap bmpThumb = null;
-        Cursor ca = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.MediaColumns._ID}, MediaStore.MediaColumns.DATA + "=?", new String[]{path}, null);
-        if (ca != null) {
-            if (ca.moveToFirst()) {
-                int id = ca.getInt(ca.getColumnIndex(MediaStore.MediaColumns._ID));
-                bmpThumb = MediaStore.Images.Thumbnails.getThumbnail(cr, id, MediaStore.Images.Thumbnails.MINI_KIND, null);
-            }
-            ca.close();
+    private static Bitmap getThumbnail(Status status) {
+        if (status.isVideo()) {
+            return ThumbnailUtils.createVideoThumbnail(status.getFile().getAbsolutePath(), MediaStore.Video.Thumbnails.MICRO_KIND);
+        } else {
+            return ThumbnailUtils.extractThumbnail(
+                    BitmapFactory.decodeFile(status.getFile().getAbsolutePath()),
+                    THUMBSIZE,
+                    THUMBSIZE);
         }
-
-        return bmpThumb;
-
     }
 
     private void genStatuses(ContentResolver contentResolver) throws StatusException {
@@ -54,10 +52,11 @@ public class StatusManager {
 
                 final Status status = new Status(
                         statusFile,
-                        getThumbnail(contentResolver, statusFile.getAbsolutePath()),
                         statusFile.getName(),
                         statusFile.getAbsolutePath()
                 );
+
+                status.setThumbnail(getThumbnail(status));
 
                 if (status.isVideo()) {
                     videoStatus.add(status);

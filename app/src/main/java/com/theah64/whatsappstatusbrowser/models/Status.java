@@ -11,16 +11,20 @@ import java.io.File;
 public class Status {
     private static final String MP4 = ".mp4";
     private final File file;
-    private final Bitmap thumbnail;
+    private Bitmap thumbnail;
     private final String title, subtitle;
     private final boolean isVideo;
 
-    public Status(File file, Bitmap thumbnail, String title, String subtitle) {
+    public Status(File file, String title, String subtitle) {
         this.file = file;
-        this.thumbnail = thumbnail;
         this.title = title;
         this.subtitle = subtitle;
         this.isVideo = file.getName().endsWith(MP4);
+    }
+
+
+    public void setThumbnail(Bitmap thumbnail) {
+        this.thumbnail = thumbnail;
     }
 
     public File getFile() {

@@ -39,7 +39,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final Status status = statusList.get(position);
-        ImageLoader.getInstance().displayImage(status.getThumbPath(), holder.civThumbnail);
+        holder.civThumbnail.setImageBitmap(status.getThumbnail());
         holder.tvTitle.setText(status.getTitle());
         holder.tvSubTitle.setText(status.getSubtitle());
     }
