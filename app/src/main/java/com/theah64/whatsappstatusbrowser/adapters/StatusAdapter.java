@@ -7,10 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.theah64.whatsappstatusbrowser.R;
 import com.theah64.whatsappstatusbrowser.models.Status;
 
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -41,7 +41,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
         final Status status = statusList.get(position);
         holder.civThumbnail.setImageBitmap(status.getThumbnail());
         holder.tvTitle.setText(status.getTitle());
-        holder.tvSubTitle.setText(status.getSubtitle());
+        holder.tvSubTitle.setText(new Date(status.getFile().lastModified()).toString());
     }
 
     @Override
