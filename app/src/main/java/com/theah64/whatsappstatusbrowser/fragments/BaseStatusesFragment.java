@@ -1,12 +1,13 @@
 package com.theah64.whatsappstatusbrowser.fragments;
 
 
-import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.theah64.whatsappstatusbrowser.R;
 import com.theah64.whatsappstatusbrowser.adapters.StatusAdapter;
 import com.theah64.whatsappstatusbrowser.models.Status;
+import com.theah64.whatsappstatusbrowser.utils.DialogUtils;
 import com.theah64.whatsappstatusbrowser.utils.StatusManager;
 
 import java.io.File;
@@ -29,22 +31,15 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public abstract class BaseStatusesFragment extends Fragment implements StatusAdapter.Callback {
+public abstract class BaseStatusesFragment extends Fragment implements StatusAdapter.Callback, StatusManager.Callback {
 
     private StatusManager statusManager;
+    private RecyclerView rvStatuses;
+    private DialogUtils dialogUtils;
+    private AlertDialog loadingDialog;
 
     public BaseStatusesFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            statusManager = new StatusManager(getContext().getContentResolver());
-        } catch (StatusManager.StatusException e) {
-            e.printStackTrace();
-        }
     }
 
     protected StatusManager getStatusManager() {
@@ -58,9 +53,16 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootLayout = inflater.inflate(R.layout.fragment_statuses, container, false);
-        final RecyclerView rvStatuses = (RecyclerView) rootLayout.findViewById(R.id.rvStatuses);
+        rvStatuses = (RecyclerView) rootLayout.findViewById(R.id.rvStatuses);
         rvStatuses.setLayoutManager(new LinearLayoutManager(getActivity()));
-        rvStatuses.setAdapter(new StatusAdapter(getActivity(), getStatuses(), this));
+
+
+        dialogUtils = new DialogUtils(getActivity());
+        loadingDialog = dialogUtils.getLoadingDialog(R.string.Loading);
+        loadingDialog.show();
+
+        statusManager = new StatusManager(this);
+
         return rootLayout;
     }
 
@@ -68,8 +70,10 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
     public void onItemClicked(int position) {
         final Status status = getStatuses().get(position);
         final String filePath = "file://" + status.getFile().getAbsolutePath();
+
         if (status.isVideo()) {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(filePath));
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
             intent.setDataAndType(Uri.parse(filePath), "video/mp4");
             startActivity(intent);
         } else {
@@ -140,5 +144,27 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
                 destination.close();
             }
         }
+    }
+
+    @Override
+    public void onLoaded() {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.dismiss();
+                rvStatuses.setAdapter(new StatusAdapter(getActivity(), getStatuses(), BaseStatusesFragment.this));
+            }
+        });
+    }
+
+    @Override
+    public void onFailed(String reason) {
+        loadingDialog.dismiss();
+        dialogUtils.showErrorDialog(reason, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().finish();
+            }
+        });
     }
 }

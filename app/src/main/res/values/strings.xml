@@ -7,4 +7,5 @@
     <string name="Insufficient_app_permission">Insufficient app permission</string>
     <string name="Saved_to_gallery">Saved to gallery!</string>
     <string name="Failed_to_save_to_gallery">Failed to save to gallery</string>
+    <string name="Loading">Loading...</string>
 </resources>

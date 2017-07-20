@@ -1,8 +1,9 @@
 package com.theah64.whatsappstatusbrowser.activities.base;
 
 import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.theah64.whatsappstatusbrowser.utils.PermissionUtils;
@@ -17,8 +18,8 @@ public abstract class BasePermissionActivity extends BaseAppCompatActivity imple
     private static final String X = BasePermissionActivity.class.getSimpleName();
 
     @Override
-    protected void onStart() {
-        super.onStart();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         new PermissionUtils(this, this, this).begin();
     }
 

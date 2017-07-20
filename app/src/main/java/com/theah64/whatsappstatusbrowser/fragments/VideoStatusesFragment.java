@@ -9,8 +9,10 @@ import java.util.List;
  */
 
 public class VideoStatusesFragment extends BaseStatusesFragment {
+
     @Override
     public List<Status> getStatuses() {
         return getStatusManager().getVideoStatuses();
     }
+
 }

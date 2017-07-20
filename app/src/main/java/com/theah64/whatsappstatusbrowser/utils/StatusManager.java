@@ -1,6 +1,5 @@
 package com.theah64.whatsappstatusbrowser.utils;
 
-import android.content.ContentResolver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
@@ -11,6 +10,8 @@ import com.theah64.whatsappstatusbrowser.models.Status;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -22,9 +23,11 @@ public class StatusManager {
     private static final File STATUS_DIRECTORY = new File(Environment.getExternalStorageDirectory() + File.separator + "WhatsApp/Media/.Statuses");
     private static final int THUMBSIZE = 128;
     private List<Status> imageStatuses, videoStatus;
+    private final Callback callback;
 
-    public StatusManager(ContentResolver contentResolver) throws StatusException {
-        genStatuses(contentResolver);
+    public StatusManager(Callback callback) {
+        this.callback = callback;
+        genStatuses();
     }
 
     private static Bitmap getThumbnail(Status status) {
@@ -38,35 +41,59 @@ public class StatusManager {
         }
     }
 
-    private void genStatuses(ContentResolver contentResolver) throws StatusException {
+    private static final Comparator lastModifiedComparator = new Comparator() {
+        public int compare(Object o1, Object o2) {
+
+            if (((File) o1).lastModified() > ((File) o2).lastModified()) {
+                return -1;
+            } else if (((File) o1).lastModified() < ((File) o2).lastModified()) {
+                return +1;
+            } else {
+                return 0;
+            }
+        }
+
+    };
+
+    private void genStatuses() {
 
         //Checking if the status directory exist
         if (STATUS_DIRECTORY.exists()) {
 
-            File[] statusFiles = STATUS_DIRECTORY.listFiles();
-            imageStatuses = new ArrayList<>();
-            videoStatus = new ArrayList<>();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    File[] statusFiles = STATUS_DIRECTORY.listFiles();
+                    Arrays.sort(statusFiles, lastModifiedComparator);
 
-            //Looping through each status
-            for (final File statusFile : statusFiles) {
+                    imageStatuses = new ArrayList<>();
+                    videoStatus = new ArrayList<>();
 
-                final Status status = new Status(
-                        statusFile,
-                        statusFile.getName(),
-                        statusFile.getAbsolutePath()
-                );
+                    //Looping through each status
+                    for (final File statusFile : statusFiles) {
 
-                status.setThumbnail(getThumbnail(status));
+                        final Status status = new Status(
+                                statusFile,
+                                statusFile.getName(),
+                                statusFile.getAbsolutePath()
+                        );
 
-                if (status.isVideo()) {
-                    videoStatus.add(status);
-                } else {
-                    imageStatuses.add(status);
+                        status.setThumbnail(getThumbnail(status));
+
+                        if (status.isVideo()) {
+                            videoStatus.add(status);
+                        } else {
+                            imageStatuses.add(status);
+                        }
+
+                    }
+
+                    callback.onLoaded();
                 }
-            }
+            }).start();
 
         } else {
-            throw new StatusException("WhatsApp Status directory not found");
+            callback.onFailed("WhatsApp Status directory not found");
         }
     }
 
@@ -78,9 +105,10 @@ public class StatusManager {
         return videoStatus;
     }
 
-    public static class StatusException extends Exception {
-        public StatusException(String message) {
-            super(message);
-        }
+    public interface Callback {
+        void onLoaded();
+
+        void onFailed(final String reason);
     }
+
 }
