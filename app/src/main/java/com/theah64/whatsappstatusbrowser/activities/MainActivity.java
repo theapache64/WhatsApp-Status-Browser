@@ -1,11 +1,15 @@
 package com.theah64.whatsappstatusbrowser.activities;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.theah64.whatsappstatusbrowser.R;
@@ -27,6 +31,20 @@ public class MainActivity extends BaseAppCompatActivity implements PermissionUti
         setSupportActionBar(toolbar);
 
         new PermissionUtils(this, this, this).begin();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(R.string.About);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        final Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse("https://github.com/theapache64/WhatsApp-Status-Browser"));
+        startActivity(i);
+        return true;
     }
 
     @Override
