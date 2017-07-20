@@ -61,7 +61,7 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
         loadingDialog = dialogUtils.getLoadingDialog(R.string.Loading);
         loadingDialog.show();
 
-        statusManager = new StatusManager(this);
+        statusManager = new StatusManager(getActivity(), this);
 
         return rootLayout;
     }
@@ -148,13 +148,8 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
 
     @Override
     public void onLoaded() {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                loadingDialog.dismiss();
-                rvStatuses.setAdapter(new StatusAdapter(getActivity(), getStatuses(), BaseStatusesFragment.this));
-            }
-        });
+        loadingDialog.dismiss();
+        rvStatuses.setAdapter(new StatusAdapter(getActivity(), getStatuses(), BaseStatusesFragment.this));
     }
 
     @Override

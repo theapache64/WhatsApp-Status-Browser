@@ -1,5 +1,6 @@
 package com.theah64.whatsappstatusbrowser.utils;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ThumbnailUtils;
@@ -24,8 +25,10 @@ public class StatusManager {
     private static final int THUMBSIZE = 128;
     private List<Status> imageStatuses, videoStatus;
     private final Callback callback;
+    private final Activity activity;
 
-    public StatusManager(Callback callback) {
+    public StatusManager(Activity activity, Callback callback) {
+        this.activity = activity;
         this.callback = callback;
         genStatuses();
     }
@@ -63,38 +66,63 @@ public class StatusManager {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+
                     File[] statusFiles = STATUS_DIRECTORY.listFiles();
-                    Arrays.sort(statusFiles, lastModifiedComparator);
 
                     imageStatuses = new ArrayList<>();
                     videoStatus = new ArrayList<>();
 
-                    //Looping through each status
-                    for (final File statusFile : statusFiles) {
+                    if (statusFiles != null && statusFiles.length > 0) {
 
-                        final Status status = new Status(
-                                statusFile,
-                                statusFile.getName(),
-                                statusFile.getAbsolutePath()
-                        );
+                        Arrays.sort(statusFiles, lastModifiedComparator);
 
-                        status.setThumbnail(getThumbnail(status));
 
-                        if (status.isVideo()) {
-                            videoStatus.add(status);
-                        } else {
-                            imageStatuses.add(status);
+                        //Looping through each status
+                        for (final File statusFile : statusFiles) {
+
+                            final Status status = new Status(
+                                    statusFile,
+                                    statusFile.getName(),
+                                    statusFile.getAbsolutePath()
+                            );
+
+                            status.setThumbnail(getThumbnail(status));
+
+                            if (status.isVideo()) {
+                                videoStatus.add(status);
+                            } else {
+                                imageStatuses.add(status);
+                            }
+
                         }
 
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                callback.onLoaded();
+                            }
+                        });
+
+                    } else {
+                        onFailedOnUI("No status found!");
                     }
 
-                    callback.onLoaded();
+
                 }
             }).start();
 
         } else {
-            callback.onFailed("WhatsApp Status directory not found");
+            onFailedOnUI("WhatsApp Status directory not found");
         }
+    }
+
+    private void onFailedOnUI(String reason) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                callback.onFailed("No status found");
+            }
+        });
     }
 
     public List<Status> getPhotoStatuses() {
