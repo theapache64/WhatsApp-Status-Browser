@@ -51,7 +51,7 @@ public class App extends Application {
         initImageLoader(this);
 
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Roboto-Regular.ttf")
+                .setDefaultFontPath("fonts/Roboto_Regular.ttf")
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
