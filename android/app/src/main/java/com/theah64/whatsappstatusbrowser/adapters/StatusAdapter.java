@@ -25,7 +25,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
 
     public StatusAdapter(final Context context, List<Status> statusList, Callback callback) {
         this.statusList = statusList;
-        this.inflater = LayoutInflater.from(context);
+        this.inflater = LayoutInflater.from(context);t
         this.callback = callback;
     }
 
