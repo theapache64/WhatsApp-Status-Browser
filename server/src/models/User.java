@@ -8,7 +8,7 @@ public class User {
     private final String id, name, email, imei, apiKey, deviceHash;
     private final boolean isActive;
 
-    public User(String id, String name, String email, String imei, String apiKey, String deviceHash, String lastHit, boolean isActive, long totalRequests, long totalDownloads, long totalTracks) {
+    public User(String id, String name, String email, String imei, String apiKey, String deviceHash, boolean isActive) {
         this.id = id;
         this.name = name;
         this.email = email;

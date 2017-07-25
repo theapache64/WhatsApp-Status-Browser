@@ -1,7 +1,6 @@
 package database.tables;
 
 
-
 import database.Connection;
 import models.User;
 
@@ -22,10 +21,6 @@ public class Users extends BaseTable<User> {
     public static final String COLUMN_IMEI = "imei";
     public static final String COLUMN_DEVICE_HASH = "device_hash";
     public static final String COLUMN_EMAIL = "email";
-    private static final String COLUMN_AS_TOTAL_REQUESTS = "total_requests";
-    private static final String COLUMN_AS_TOTAL_DOWNLOADS = "total_downloads";
-    private static final String COLUMN_AS_TOTAL_TRACKS = "total_tracks";
-    private static final String COLUMN_AS_LAST_HIT = "last_hit";
 
     private Users() {
         super("users");
@@ -35,10 +30,48 @@ public class Users extends BaseTable<User> {
         return instance;
     }
 
+    public List<User> getAll() {
+        List<User> users = null;
+        final String query = "SELECT u.id, u.name, u.email, u.imei, COUNT(d.id) AS total_downloads, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND type = 'VIDEO') AS total_videos, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND type = 'PHOTO') AS total_photos FROM users u LEFT JOIN downloads d ON d.user_id = u.id GROUP BY u.id;";
+        final java.sql.Connection con = Connection.getConnection();
+        try {
+            final Statement stmt = con.createStatement();
+            final ResultSet rs = stmt.executeQuery(query);
 
+            if (rs.first()) {
+                users = new ArrayList<>();
+                do {
+                    final String id = rs.getString(COLUMN_ID);
+                    final String name = rs.getString(COLUMN_NAME);
+                    final String imei = rs.getString(COLUMN_IMEI);
+                    final String email = rs.getString(COLUMN_EMAIL);
+                    final long totalRequests = rs.getLong(COLUMN_AS_TOTAL_REQUESTS);
+                    final long totalDownloads = rs.getLong(COLUMN_AS_TOTAL_DOWNLOADS);
+                    final long totalTracks = rs.getLong(COLUMN_AS_TOTAL_TRACKS);
+                    final String lastHit = rs.getString(COLUMN_AS_LAST_HIT);
+                    final boolean isActive = rs.getBoolean(COLUMN_IS_ACTIVE);
+
+                    users.add(new User(id, name, email, imei, null, null, lastHit, isActive, totalRequests, totalDownloads, totalTracks));
+                } while (rs.next());
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return users;
+    }
 
     @Override
-    public boolean add(User newUser) throws InsertFailedException {
+    public boolean add(User newUser) throws SQLException {
 
         boolean isUserAdded = false;
         final String query = "INSERT INTO users (name,imei,device_hash,api_key,email) VALUES (?,?,?,?,?);";
@@ -67,7 +100,7 @@ public class Users extends BaseTable<User> {
         }
 
         if (!isUserAdded) {
-            throw new InsertFailedException("Failed to add new user, please try again.");
+            throw new SQLException("Failed to add new user, please try again.");
         }
 
         return true;
@@ -116,7 +149,7 @@ public class Users extends BaseTable<User> {
     }
 
     @Override
-    public boolean update(User user) throws UpdateFailedException {
+    public boolean update(User user) throws SQLException {
         boolean isUpdated = false;
         final String query = "UPDATE users SET name = ? , email = ?, imei = ?, device_hash = ?, api_key = ?, updated_at = NOW() WHERE id = ?";
         final java.sql.Connection con = Connection.getConnection();
@@ -143,7 +176,7 @@ public class Users extends BaseTable<User> {
         }
 
         if (!isUpdated) {
-            throw new UpdateFailedException("Failed to update user");
+            throw new SQLException("Failed to update user");
         }
 
         return true;

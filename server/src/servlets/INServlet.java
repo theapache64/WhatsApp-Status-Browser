@@ -12,6 +12,7 @@ import utils.Request;
 import javax.servlet.annotation.WebServlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.Random;
 
 /**
@@ -53,7 +54,7 @@ public class INServlet extends AdvancedBaseServlet {
     }
 
     @Override
-    protected void doAdvancedPost() throws JSONException, Request.RequestException, IOException {
+    protected void doAdvancedPost() throws JSONException, Request.RequestException, IOException, SQLException {
 
         final PrintWriter out = getWriter();
 
@@ -76,14 +77,11 @@ public class INServlet extends AdvancedBaseServlet {
 
             final String userString = user.toString();
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+            new Thread(() -> {
 
-                    final String adminEmail = Preference.getInstance().getString(Preference.KEY_ADMIN_EMAIL);
-                    MailHelper.sendMail(adminEmail, "User: " + userString);
+                final String adminEmail = Preference.getInstance().getString(Preference.KEY_ADMIN_EMAIL);
+                MailHelper.sendMail(adminEmail, "User: " + userString);
 
-                }
             }).start();
         }
 

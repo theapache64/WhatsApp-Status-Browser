@@ -1,7 +1,6 @@
 package database.tables;
 
 
-
 import database.Connection;
 
 import java.sql.PreparedStatement;
@@ -50,7 +49,7 @@ public class BaseTable<T> {
         throw new IllegalArgumentException(ERROR_MESSAGE_UNDEFINED_METHOD);
     }
 
-    public boolean add(T newInstance)  {
+    public boolean add(T newInstance) throws SQLException {
         throw new IllegalArgumentException(ERROR_MESSAGE_UNDEFINED_METHOD);
     }
 
@@ -88,7 +87,7 @@ public class BaseTable<T> {
     }
 
 
-    public boolean update(T t) {
+    public boolean update(T t) throws SQLException {
         throw new IllegalArgumentException(ERROR_MESSAGE_UNDEFINED_METHOD);
     }
 
@@ -115,6 +114,7 @@ public class BaseTable<T> {
             if (rs.first()) {
                 resultValue = rs.getString(columnToReturn);
             }
+
             rs.close();
             ps.close();
         } catch (SQLException e) {

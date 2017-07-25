@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 /**
  * Created by shifar on 16/9/16.
@@ -96,7 +97,7 @@ public abstract class AdvancedBaseServlet extends HttpServlet {
 
     protected abstract String[] getRequiredParameters();
 
-    protected abstract void doAdvancedPost() throws JSONException, Request.RequestException, IOException;
+    protected abstract void doAdvancedPost() throws JSONException, Request.RequestException, IOException, SQLException;
 
     HeaderSecurity getHeaderSecurity() {
         if (!isSecureServlet()) {
