@@ -21,6 +21,7 @@ public class Users extends BaseTable<User> {
     public static final String COLUMN_IMEI = "imei";
     public static final String COLUMN_DEVICE_HASH = "device_hash";
     public static final String COLUMN_EMAIL = "email";
+    private static final String COLUMN_AS_TOTAL_DOWNLOADS = "total_downloads";
 
     private Users() {
         super("users");
@@ -45,10 +46,8 @@ public class Users extends BaseTable<User> {
                     final String name = rs.getString(COLUMN_NAME);
                     final String imei = rs.getString(COLUMN_IMEI);
                     final String email = rs.getString(COLUMN_EMAIL);
-                    final long totalRequests = rs.getLong(COLUMN_AS_TOTAL_REQUESTS);
-                    final long totalDownloads = rs.getLong(COLUMN_AS_TOTAL_DOWNLOADS);
-                    final long totalTracks = rs.getLong(COLUMN_AS_TOTAL_TRACKS);
-                    final String lastHit = rs.getString(COLUMN_AS_LAST_HIT);
+                    final int totalDownloads = rs.getInt(COLUMN_AS_TOTAL_DOWNLOADS);
+                    final int to
                     final boolean isActive = rs.getBoolean(COLUMN_IS_ACTIVE);
 
                     users.add(new User(id, name, email, imei, null, null, lastHit, isActive, totalRequests, totalDownloads, totalTracks));
