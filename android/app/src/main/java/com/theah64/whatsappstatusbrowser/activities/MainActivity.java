@@ -20,9 +20,6 @@ import com.theah64.whatsappstatusbrowser.utils.PermissionUtils;
 public class MainActivity extends BaseAppCompatActivity implements PermissionUtils.Callback {
 
 
-    private ViewPager vpStatuses;
-    private TabLayout tabLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +38,10 @@ public class MainActivity extends BaseAppCompatActivity implements PermissionUti
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        //Tribute :P
+        Toast.makeText(this, "Developed by theapache64", Toast.LENGTH_SHORT).show();
+
         final Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse("https://github.com/theapache64/WhatsApp-Status-Browser"));
         startActivity(i);
@@ -70,8 +71,8 @@ public class MainActivity extends BaseAppCompatActivity implements PermissionUti
 
     @Override
     public void onAllPermissionGranted() {
-        vpStatuses = (ViewPager) findViewById(R.id.vpStatuses);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        ViewPager vpStatuses = (ViewPager) findViewById(R.id.vpStatuses);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         vpStatuses.setAdapter(new PagerAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(vpStatuses);
     }
