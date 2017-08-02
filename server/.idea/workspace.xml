@@ -9,18 +9,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/database/tables/Downloads.java" line="27" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f76f5699-7da0-401f-84ae-adbe8c319af3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/wsb.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../wsb_backup_25-07-2017_21:01:32.sql" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../android/app/src/main/java/com/theah64/whatsappstatusbrowser/fragments/BaseStatusesFragment.java" afterPath="$PROJECT_DIR$/../android/app/src/main/java/com/theah64/whatsappstatusbrowser/fragments/BaseStatusesFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/Connection.java" afterPath="$PROJECT_DIR$/src/database/Connection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/tables/Users.java" afterPath="$PROJECT_DIR$/src/database/tables/Users.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/models/User.java" afterPath="$PROJECT_DIR$/src/models/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/servlets/INServlet.java" afterPath="$PROJECT_DIR$/src/servlets/INServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/TimeUtils.java" afterPath="$PROJECT_DIR$/src/utils/TimeUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/status.jsp" afterPath="$PROJECT_DIR$/web/status.jsp" />
-    </list>
+    <list default="true" id="f76f5699-7da0-401f-84ae-adbe8c319af3" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -108,8 +97,8 @@
       <file leaf-file-name="Users.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/database/tables/Users.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="50" column="34" lean-forward="false" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+            <state relative-caret-position="360">
+              <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <marker date="1501644818482" expanded="true" signature="1209:1676" ph="SELECT u.is_... users" />
@@ -967,12 +956,12 @@
       <workItem from="1500991653980" duration="4594000" />
       <workItem from="1501010813162" duration="757000" />
       <workItem from="1501597492231" duration="1320000" />
-      <workItem from="1501643040178" duration="1852000" />
+      <workItem from="1501643040178" duration="2013000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10326000" />
+    <option name="totallyTimeSpent" value="10487000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1641,8 +1630,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/database/tables/Users.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="50" column="34" lean-forward="false" selection-start-line="50" selection-start-column="34" selection-end-line="50" selection-end-column="34" />
+        <state relative-caret-position="360">
+          <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <marker date="1501644818482" expanded="true" signature="1209:1676" ph="SELECT u.is_... users" />
