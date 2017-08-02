@@ -55,7 +55,7 @@ public class StatusAdapter extends RecyclerView.Adapter<StatusAdapter.ViewHolder
             this.ivThumbnail = (ImageView) itemView.findViewById(R.id.ivThumbnail);
             itemView.setOnClickListener(this);
             itemView.findViewById(R.id.ibSaveToGallery).setOnClickListener(this);
-            ivThumbnail.setOnLongClickListener(new View.OnLongClickListener() {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     callback.onShare(getLayoutPosition());
