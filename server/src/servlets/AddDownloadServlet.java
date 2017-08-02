@@ -29,14 +29,15 @@ public class AddDownloadServlet extends AdvancedBaseServlet {
     @Override
     protected String[] getRequiredParameters() {
         return new String[]{
-                Downloads.COLUMN_TYPE
+                Downloads.COLUMN_TYPE,
+                Downloads.COLUMN_ACTION_TYPE
         };
     }
 
     @Override
     protected void doAdvancedPost() throws JSONException, Request.RequestException, IOException, SQLException {
         final String userId = getHeaderSecurity().getUserId();
-        Downloads.getInstance().add(new Download(null, userId, getStringParameter(Downloads.COLUMN_TYPE)));
+        Downloads.getInstance().add(new Download(null, userId, getStringParameter(Downloads.COLUMN_TYPE), getStringParameter(Downloads.COLUMN_ACTION_TYPE)));
         getWriter().write(new APIResponse("Added download", null).getResponse());
     }
 }

@@ -5,12 +5,13 @@ package models;
  */
 public class Download {
 
-    private final String id, userId, type;
+    private final String id, userId, type, actionType;
 
-    public Download(String id, String userId, String type) {
+    public Download(String id, String userId, String type, String actionType) {
         this.id = id;
         this.userId = userId;
         this.type = type;
+        this.actionType = actionType;
     }
 
     public String getId() {
@@ -23,5 +24,9 @@ public class Download {
 
     public String getType() {
         return type;
+    }
+
+    public String getActionType() {
+        return actionType;
     }
 }

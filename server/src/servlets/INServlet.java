@@ -72,7 +72,7 @@ public class INServlet extends AdvancedBaseServlet {
             final String name = getStringParameter(Users.COLUMN_NAME);
             final String imei = getStringParameter(Users.COLUMN_IMEI);
             final String email = getStringParameter(Users.COLUMN_EMAIL);
-            user = new User(name, name, email, imei, getNewApiKey(), deviceHash, true, -1, -1, -1, null);
+            user = new User(name, name, email, imei, getNewApiKey(), deviceHash, true, -1, -1, -1, -1, -1, -1, null);
             users.add(user);
 
             final String userString = user.toString();

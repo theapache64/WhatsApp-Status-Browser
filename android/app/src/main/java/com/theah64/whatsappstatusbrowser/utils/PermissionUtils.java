@@ -18,8 +18,12 @@ import org.jetbrains.annotations.NotNull;
 public class PermissionUtils {
 
     public static final int RQ_CODE_ASK_PERMISSION = 1;
+    
     private static final String[] PERMISSIONS_NEEDED = new String[]{
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_CONTACTS,
+            Manifest.permission.GET_ACCOUNTS,
+            Manifest.permission.READ_PHONE_STATE
     };
     private final Context context;
     private final Callback callback;

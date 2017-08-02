@@ -13,6 +13,7 @@ public class Downloads extends BaseTable<Download> {
 
     private static final Downloads instance = new Downloads();
     public static final String COLUMN_TYPE = "type";
+    public static final String COLUMN_ACTION_TYPE = "action_type";
 
     private Downloads() {
         super("downloads");
@@ -25,12 +26,13 @@ public class Downloads extends BaseTable<Download> {
     @Override
     public boolean add(Download download) throws SQLException {
         String error = null;
-        final String query = "INSERT INTO downloads (user_id, type) VALUES (?,?);";
+        final String query = "INSERT INTO downloads (user_id, type,action_type) VALUES (?,?,?);";
         final java.sql.Connection con = Connection.getConnection();
         try {
             final PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, download.getUserId());
             ps.setString(2, download.getType());
+            ps.setString(3, download.getActionType());
             final boolean isAdded = ps.executeUpdate() == 1;
             if (!isAdded) {
                 error = "Failed to add new download";

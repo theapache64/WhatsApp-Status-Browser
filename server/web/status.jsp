@@ -31,6 +31,11 @@
             <td>Total downloads</td>
             <td>Videos downloaded</td>
             <td>Photos downloaded</td>
+
+            <td>Total views</td>
+            <td>Videos viewed</td>
+            <td>Photos viewed</td>
+
             <td>Last hit</td>
             <td>isActive</td>
         </tr>
@@ -57,6 +62,15 @@
             </td>
             <td><%=user.getTotalPhotosDownloaded()%>
             </td>
+
+            <td><%=user.getTotalViews()%>
+            </td>
+            <td><%=user.getTotalVideosViewed()%>
+            </td>
+            <td><%=user.getTotalPhotosViewed()%>
+            </td>
+
+
             <td>
                 <%=user.getLastHit()%>
             </td>

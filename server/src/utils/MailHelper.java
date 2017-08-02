@@ -49,7 +49,7 @@ public class MailHelper {
         try {
             mimeMessage.setFrom(new InternetAddress(gmailUsername));
             mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-            mimeMessage.setSubject("New user @ SCD");
+            mimeMessage.setSubject("New user @ WSB");
             mimeMessage.setText(message);
 
             Transport.send(mimeMessage);

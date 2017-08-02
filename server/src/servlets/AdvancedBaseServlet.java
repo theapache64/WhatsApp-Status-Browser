@@ -2,7 +2,6 @@ package servlets;
 
 
 import database.Connection;
-import database.tables.BaseTable;
 import org.json.JSONException;
 import utils.APIResponse;
 import utils.HeaderSecurity;

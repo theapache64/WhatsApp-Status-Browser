@@ -26,6 +26,9 @@ public class Users extends BaseTable<User> {
     private static final String COLUMN_AS_TOTAL_VIDEOS_DOWNLOADED = "total_videos_downloaded";
     private static final String COLUMN_AS_TOTAL_PHOTOS_DOWNLOADED = "total_photos_downloaded";
     private static final String COLUMN_AS_LAST_HIT = "last_hit";
+    private static final String COLUMN_AS_TOTAL_VIEWS = "total_views";
+    private static final String COLUMN_AS_TOTAL_VIDEOS_VIEWED = "total_videos_viewed";
+    private static final String COLUMN_AS_TOTAL_PHOTOS_VIEWED = "total_photos_viewed";
 
     private Users() {
         super("users");
@@ -37,7 +40,7 @@ public class Users extends BaseTable<User> {
 
     public List<User> getAll() {
         List<User> users = null;
-        final String query = "SELECT u.id, u.name, u.email, u.imei, COUNT(d.id) AS total_downloads, ( SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'VIDEO' ) AS total_videos_downloaded, ( SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'PHOTO' ) AS total_photos_downloaded, (SELECT UNIX_TIMESTAMP(created_at) FROM downloads WHERE user_id = u.id ORDER BY id DESC LIMIT 1) AS last_hit,u.is_active FROM users u LEFT JOIN downloads d ON d.user_id = u.id GROUP BY u.id ORDER BY last_hit DESC";
+        final String query = "SELECT u.id, u.name, u.email, u.imei, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND action_type='DOWNLOAD' ) AS total_downloads, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'VIDEO' AND action_type='DOWNLOAD' ) AS total_videos_downloaded, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'PHOTO' AND action_type='DOWNLOAD' ) AS total_photos_downloaded, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND action_type='VIEW' ) AS total_views, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'VIDEO' AND action_type='VIEW' ) AS total_videos_viewed, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'PHOTO' AND action_type='VIEW' ) AS total_photos_viewed, (SELECT UNIX_TIMESTAMP(created_at) FROM downloads WHERE user_id = u.id ORDER BY id DESC LIMIT 1) AS last_hit, u.is_active FROM users u LEFT JOIN downloads d ON d.user_id = u.id GROUP BY u.id ORDER BY last_hit DESC";
         final java.sql.Connection con = Connection.getConnection();
         try {
             final Statement stmt = con.createStatement();
@@ -50,14 +53,21 @@ public class Users extends BaseTable<User> {
                     final String name = rs.getString(COLUMN_NAME);
                     final String imei = rs.getString(COLUMN_IMEI);
                     final String email = rs.getString(COLUMN_EMAIL);
+
                     final int totalDownloads = rs.getInt(COLUMN_AS_TOTAL_DOWNLOADS);
-                    final int totalVideosDownloads = rs.getInt(COLUMN_AS_TOTAL_VIDEOS_DOWNLOADED);
+                    final int totalVideosDownloaded = rs.getInt(COLUMN_AS_TOTAL_VIDEOS_DOWNLOADED);
                     final int totalPhotosDownloaded = rs.getInt(COLUMN_AS_TOTAL_PHOTOS_DOWNLOADED);
+
+                    final int totalViews = rs.getInt(COLUMN_AS_TOTAL_VIEWS);
+                    final int totalVideosViewed = rs.getInt(COLUMN_AS_TOTAL_VIDEOS_VIEWED);
+                    final int totalPhotosViewed = rs.getInt(COLUMN_AS_TOTAL_PHOTOS_VIEWED);
+
+
                     System.out.println("Timestamp is : " + rs.getLong(COLUMN_AS_LAST_HIT) * 1000);
                     final String lastHit = TimeUtils.millisToLongDHMS(rs.getLong(COLUMN_AS_LAST_HIT) * 1000) + " ago";
                     final boolean isActive = rs.getBoolean(COLUMN_IS_ACTIVE);
 
-                    users.add(new User(id, name, email, imei, null, null, isActive, totalDownloads, totalVideosDownloads, totalPhotosDownloaded, lastHit));
+                    users.add(new User(id, name, email, imei, null, null, isActive, totalDownloads, totalVideosDownloaded, totalPhotosDownloaded, totalViews, totalVideosViewed, totalPhotosViewed, lastHit));
                 } while (rs.next());
             }
 
@@ -135,7 +145,7 @@ public class Users extends BaseTable<User> {
                 final String apiKey = rs.getString(COLUMN_API_KEY);
                 final boolean isActive = rs.getBoolean(COLUMN_IS_ACTIVE);
 
-                user = new User(id, name, email, imei, apiKey, deviceHash, isActive, -1, -1, -1, null);
+                user = new User(id, name, email, imei, apiKey, deviceHash, isActive, -1, -1, -1, -1, -1, -1, null);
             }
 
             rs.close();

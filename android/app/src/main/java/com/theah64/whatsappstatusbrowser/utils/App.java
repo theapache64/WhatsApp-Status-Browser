@@ -19,6 +19,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
  */
 
 public class App extends Application {
+
     private static void initImageLoader(final Context context) {
 
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
