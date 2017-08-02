@@ -84,7 +84,7 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
         }
 
         //Updating analytics
-        
+
     }
 
     private static final String APP_DIR = Environment.getExternalStorageDirectory() + File.separator + "WhatsAppStatuses";

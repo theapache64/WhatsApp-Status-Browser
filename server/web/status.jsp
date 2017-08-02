@@ -30,7 +30,7 @@
             <td>EMail</td>
             <td>Total downloads</td>
             <td>Videos downloaded</td>
-            <td>Photos photos</td>
+            <td>Photos downloaded</td>
             <td>Last hit</td>
             <td>isActive</td>
         </tr>

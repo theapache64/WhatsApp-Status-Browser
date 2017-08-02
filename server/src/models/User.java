@@ -8,9 +8,9 @@ public class User {
     private final String id, name, email, imei, apiKey, deviceHash;
     private final boolean isActive;
     private final int totalDownloads, totalVideosDownloaded, totalPhotosDownloaded;
-    private final long lastHit;
+    private final String lastHit;
 
-    public User(String id, String name, String email, String imei, String apiKey, String deviceHash, boolean isActive, int totalDownloads, int totalVideosDownloaded, int totalPhotosDownloaded, long lastHit) {
+    public User(String id, String name, String email, String imei, String apiKey, String deviceHash, boolean isActive, int totalDownloads, int totalVideosDownloaded, int totalPhotosDownloaded, String lastHit) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -77,7 +77,7 @@ public class User {
                 '}';
     }
 
-    public long getLastHit() {
+    public String getLastHit() {
         return lastHit;
     }
 }

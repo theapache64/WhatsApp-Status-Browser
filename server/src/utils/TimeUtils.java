@@ -24,7 +24,14 @@ public class TimeUtils {
      * "<w> days, <x> hours, <y> minutes and (z) seconds"
      */
     public static String millisToLongDHMS(long duration) {
+
+        if (duration == 0) {
+            return "-";
+        }
+
         StringBuffer res = new StringBuffer();
+        System.out.println("Duration:" + duration);
+        duration = System.currentTimeMillis() - duration;
         long temp = 0;
         if (duration >= ONE_SECOND) {
             temp = duration / ONE_DAY;

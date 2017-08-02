@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class Connection {
 
-    private static final boolean debugMode = true;
+    private static final boolean debugMode = false;
     private static DataSource ds;
 
     public static java.sql.Connection getConnection() {

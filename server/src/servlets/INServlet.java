@@ -23,7 +23,7 @@ public class INServlet extends AdvancedBaseServlet {
 
     //Used to generate a new user
     private static final int API_KEY_LENGTH = 10;
-    private static final String apiEngine = "0123456789AaBbCcDdEeFfGgHhIiJjKkLkMmNnOoPpQqRrSsTtUuVvWwXxYyZ";
+    private static final String apiEngine = "0123456789AaBbCcDdEeFfGgHhIiJjKkLkMmNnOoPpQqRrSsTtUuVvWwXxYyZz";
     private static Random random;
 
     private static String getNewApiKey() {
