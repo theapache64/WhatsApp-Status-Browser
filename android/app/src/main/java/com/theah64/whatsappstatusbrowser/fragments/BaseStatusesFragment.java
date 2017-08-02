@@ -224,4 +224,18 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
             }
         });
     }
+
+    @Override
+    public void onShare(int position) {
+
+        Toast.makeText(getActivity(), "Choose app to share", Toast.LENGTH_SHORT).show();
+
+        final Status status = getStatuses().get(position);
+
+        final Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType(status.isVideo() ? "video/mp4" : "image/jpg");
+        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(status.getFile()));
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "Shared using WhatsApp Status Downloader - https://play.google.com/store/apps/details?id=com.theah64.whatsappstatusbrowser");
+        startActivity(Intent.createChooser(shareIntent, "Share using"));
+    }
 }
