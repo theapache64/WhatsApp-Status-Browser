@@ -47,7 +47,7 @@ public abstract class AdvancedBaseServlet extends HttpServlet {
     }
 
     public static String getBaseUrl() {
-        return (Connection.isDebugMode() ? "http://localhost:8080/scd" : "http://theapache64.xyz:8080/scd");
+        return (Connection.isDebugMode() ? "http://localhost:8080/scd" : "http://18.220.163.253:8080/scd");
     }
 
     public PrintWriter getWriter() {

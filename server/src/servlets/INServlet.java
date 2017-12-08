@@ -1,12 +1,10 @@
 package servlets;
 
 
-import database.tables.Preference;
 import database.tables.Users;
 import models.User;
 import org.json.JSONException;
 import utils.APIResponse;
-import utils.MailHelper;
 import utils.Request;
 
 import javax.servlet.annotation.WebServlet;
@@ -75,14 +73,14 @@ public class INServlet extends AdvancedBaseServlet {
             user = new User(name, name, email, imei, getNewApiKey(), deviceHash, true, -1, -1, -1, -1, -1, -1, null);
             users.add(user);
 
-            final String userString = user.toString();
+            /*final String userString = user.toString();
 
             new Thread(() -> {
 
                 final String adminEmail = Preference.getInstance().getString(Preference.KEY_ADMIN_EMAIL);
                 MailHelper.sendMail(adminEmail, "User: " + userString);
 
-            }).start();
+            }).start();*/
         }
 
         final String message = isAlreadyExist ? "Welcome back!" : "Welcome!";
