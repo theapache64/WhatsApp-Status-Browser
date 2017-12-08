@@ -23,6 +23,7 @@ import com.theah64.whatsappstatusbrowser.models.Status;
 import com.theah64.whatsappstatusbrowser.utils.APIRequestBuilder;
 import com.theah64.whatsappstatusbrowser.utils.APIRequestGateway;
 import com.theah64.whatsappstatusbrowser.utils.DialogUtils;
+import com.theah64.whatsappstatusbrowser.utils.GenericFileProvider;
 import com.theah64.whatsappstatusbrowser.utils.OkHttpUtils;
 import com.theah64.whatsappstatusbrowser.utils.StatusManager;
 
@@ -83,28 +84,23 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
 
     @Override
     public void onItemClicked(int position) {
-        final Status status = getStatuses().get(position);
-        final String filePath = "file://" + status.getFile().getAbsolutePath();
 
-        final String type;
+        final Status status = getStatuses().get(position);
+
+        final String type, iType;
         if (status.isVideo()) {
             type = TYPE_VIDEO;
-
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.parse(filePath), "video/mp4");
-            startActivity(intent);
+            iType = "video/mp4";
         } else {
             type = TYPE_PHOTO;
-
-            Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.parse(filePath), "image/jpg");
-            startActivity(intent);
+            iType = "image/jpg";
         }
 
-        Log.d(X, "Updating anlytics...");
-
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setDataAndType(GenericFileProvider.getUriForFileWithAuthority(getActivity(), status.getFile()), iType);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(intent);
         addToDb(type, ACTION_TYPE_VIEW);
     }
 
