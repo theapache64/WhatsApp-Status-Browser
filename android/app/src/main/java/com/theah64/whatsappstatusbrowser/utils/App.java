@@ -10,6 +10,9 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.theah64.bugmailer.core.BugMailer;
+import com.theah64.bugmailer.core.BugMailerConfig;
+import com.theah64.bugmailer.exceptions.BugMailerException;
 import com.theah64.whatsappstatusbrowser.R;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -56,6 +59,12 @@ public class App extends Application {
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
+
+        try {
+            BugMailer.init(this, new BugMailerConfig("theapache64@gmail.com"));
+        } catch (BugMailerException e) {
+            e.printStackTrace();
+        }
     }
 
 }

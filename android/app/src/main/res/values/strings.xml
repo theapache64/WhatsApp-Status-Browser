@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WhatsApp Status Browser</string>
+    <string name="app_name">Status Saver for WhatsApp</string>
     <string name="action_settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -7,6 +7,6 @@
     <string name="Insufficient_app_permission">Insufficient app permission</string>
     <string name="Saved_to_gallery">Saved to gallery!</string>
     <string name="Failed_to_save_to_gallery">Failed to save to gallery</string>
-    <string name="Loading">Loading...</string>
+    <string name="Loading">Loading…</string>
     <string name="About">About</string>
 </resources>

@@ -73,7 +73,7 @@ public class APIRequestGateway {
 
         tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
 
-        @SuppressLint("HardwareIds")
+        @SuppressLint({"HardwareIds", "MissingPermission"})
         final String imei = tm.getDeviceId();
         final String deviceHash = DarKnight.getEncrypted(getDeviceName() + imei);
 

@@ -9,15 +9,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/database/tables/Downloads.java" line="28" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f76f5699-7da0-401f-84ae-adbe8c319af3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../android/.idea/misc.xml" afterPath="$PROJECT_DIR$/../android/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../android/build.gradle" afterPath="$PROJECT_DIR$/../android/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../android/gradle/wrapper/gradle-wrapper.properties" afterPath="$PROJECT_DIR$/../android/gradle/wrapper/gradle-wrapper.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/database/Connection.java" afterPath="$PROJECT_DIR$/src/database/Connection.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/servlets/AdvancedBaseServlet.java" afterPath="$PROJECT_DIR$/src/servlets/AdvancedBaseServlet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/servlets/INServlet.java" afterPath="$PROJECT_DIR$/src/servlets/INServlet.java" />
-    </list>
+    <list default="true" id="f76f5699-7da0-401f-84ae-adbe8c319af3" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -864,12 +856,12 @@
       <workItem from="1504501715865" duration="90000" />
       <workItem from="1507726722788" duration="32000" />
       <workItem from="1511777234094" duration="107000" />
-      <workItem from="1512713481529" duration="1382000" />
+      <workItem from="1512713481529" duration="1431000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13711000" />
+    <option name="totallyTimeSpent" value="13760000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -882,7 +874,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="51" y="24" width="1315" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287037" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -894,7 +886,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7275542" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2710796" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
