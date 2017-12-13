@@ -3,7 +3,6 @@ package com.theah64.whatsappstatusbrowser.fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -23,9 +22,9 @@ import com.theah64.whatsappstatusbrowser.models.Status;
 import com.theah64.whatsappstatusbrowser.utils.APIRequestBuilder;
 import com.theah64.whatsappstatusbrowser.utils.APIRequestGateway;
 import com.theah64.whatsappstatusbrowser.utils.DialogUtils;
-import com.theah64.whatsappstatusbrowser.utils.GenericFileProvider;
 import com.theah64.whatsappstatusbrowser.utils.OkHttpUtils;
 import com.theah64.whatsappstatusbrowser.utils.StatusManager;
+import com.theah64.whatsappstatusbrowser.utils.UriCompat;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -98,8 +97,7 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
 
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(GenericFileProvider.getUriForFileWithAuthority(getActivity(), status.getFile()), iType);
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setDataAndType(UriCompat.fromFile(getActivity(), status.getFile(), intent), iType);
         startActivity(intent);
         addToDb(type, ACTION_TYPE_VIEW);
     }
@@ -165,7 +163,7 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
 
             Intent intent =
                     new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            intent.setData(Uri.fromFile(destFile));
+            intent.setData(UriCompat.fromFile(getActivity(), destFile, intent));
             getActivity().sendBroadcast(intent);
 
 
@@ -230,7 +228,7 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
 
         final Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType(status.isVideo() ? "video/mp4" : "image/jpg");
-        shareIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(status.getFile()));
+        shareIntent.putExtra(Intent.EXTRA_STREAM, UriCompat.fromFile(getActivity(), status.getFile(), shareIntent));
         shareIntent.putExtra(Intent.EXTRA_TEXT, "Shared using WhatsApp Status Downloader - https://play.google.com/store/apps/details?id=com.theah64.whatsappstatusbrowser");
         startActivity(Intent.createChooser(shareIntent, "Share using"));
     }
