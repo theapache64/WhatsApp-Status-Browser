@@ -1,6 +1,7 @@
 package com.theah64.whatsappstatusbrowser.fragments;
 
 
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -95,10 +96,15 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
             iType = "image/jpg";
         }
 
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.setDataAndType(UriCompat.fromFile(getActivity(), status.getFile(), intent), iType);
-        startActivity(intent);
+        try {
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_VIEW);
+            intent.setDataAndType(UriCompat.fromFile(getActivity(), status.getFile(), intent), iType);
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+            Toast.makeText(getActivity(), R.string.No_viewer_found, Toast.LENGTH_SHORT).show();
+        }
         addToDb(type, ACTION_TYPE_VIEW);
     }
 
@@ -106,6 +112,7 @@ public abstract class BaseStatusesFragment extends Fragment implements StatusAda
 
         //Updating analytics
         new APIRequestGateway(getContext(), new APIRequestGateway.APIRequestGatewayCallback() {
+
             @Override
             public void onReadyToRequest(String apiKey) {
 

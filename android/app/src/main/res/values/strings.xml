@@ -9,4 +9,5 @@
     <string name="Failed_to_save_to_gallery">Failed to save to gallery</string>
     <string name="Loading">Loading…</string>
     <string name="About">About</string>
+    <string name="No_viewer_found">No viewer found</string>
 </resources>
