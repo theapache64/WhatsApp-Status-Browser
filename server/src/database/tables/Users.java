@@ -38,9 +38,9 @@ public class Users extends BaseTable<User> {
         return instance;
     }
 
-    public List<User> getAll() {
+    public List<User> getAll10() {
         List<User> users = null;
-        final String query = "SELECT u.id, u.name, u.email, u.imei, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND action_type='DOWNLOAD' ) AS total_downloads, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'VIDEO' AND action_type='DOWNLOAD' ) AS total_videos_downloaded, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'PHOTO' AND action_type='DOWNLOAD' ) AS total_photos_downloaded, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND action_type='VIEW' ) AS total_views, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'VIDEO' AND action_type='VIEW' ) AS total_videos_viewed, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'PHOTO' AND action_type='VIEW' ) AS total_photos_viewed, (SELECT UNIX_TIMESTAMP(created_at) FROM downloads WHERE user_id = u.id ORDER BY id DESC LIMIT 1) AS last_hit, u.is_active FROM users u LEFT JOIN downloads d ON d.user_id = u.id GROUP BY u.id ORDER BY last_hit DESC";
+        final String query = "SELECT u.id, u.name, u.email, u.imei, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND action_type='DOWNLOAD' ) AS total_downloads, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'VIDEO' AND action_type='DOWNLOAD' ) AS total_videos_downloaded, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'PHOTO' AND action_type='DOWNLOAD' ) AS total_photos_downloaded, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND action_type='VIEW' ) AS total_views, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'VIDEO' AND action_type='VIEW' ) AS total_videos_viewed, (SELECT COUNT(id) FROM downloads WHERE user_id = u.id AND TYPE = 'PHOTO' AND action_type='VIEW' ) AS total_photos_viewed, (SELECT UNIX_TIMESTAMP(created_at) FROM downloads WHERE user_id = u.id ORDER BY id DESC LIMIT 1) AS last_hit, u.is_active FROM users u LEFT JOIN downloads d ON d.user_id = u.id GROUP BY u.id ORDER BY last_hit DESC LIMIT 10";
         final java.sql.Connection con = Connection.getConnection();
         try {
             final Statement stmt = con.createStatement();

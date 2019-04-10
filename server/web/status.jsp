@@ -43,7 +43,7 @@
         <tbody>
 
         <%
-            final List<User> users = Users.getInstance().getAll();
+            final List<User> users = Users.getInstance().getAll10();
             if (users != null) {
                 for (final User user : users) {
         %>

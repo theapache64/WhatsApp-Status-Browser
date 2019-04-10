@@ -11,7 +11,7 @@ import okhttp3.Request;
  */
 public class APIRequestBuilder {
 
-    public static final String BASE_URL = "http://theapache64.cf:8080/wsb/v1";
+    private static final String BASE_URL = "http://theapache64.com/wsb/v1";
 
     private static final String X = APIRequestBuilder.class.getSimpleName();
     private static final String KEY_AUTHORIZATION = "Authorization";
