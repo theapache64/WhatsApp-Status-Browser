@@ -6,10 +6,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 
-import org.jetbrains.annotations.NotNull;
+import androidx.core.app.ActivityCompat;
 
 /**
  * Created by theapache64 on 5/1/17.
@@ -20,16 +18,13 @@ public class PermissionUtils {
     public static final int RQ_CODE_ASK_PERMISSION = 1;
     
     private static final String[] PERMISSIONS_NEEDED = new String[]{
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            Manifest.permission.READ_CONTACTS,
-            Manifest.permission.GET_ACCOUNTS,
-            Manifest.permission.READ_PHONE_STATE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     private final Context context;
     private final Callback callback;
     private final Activity activity;
 
-    public PermissionUtils(@NotNull Context context, @NotNull Callback callback, @Nullable Activity activity) {
+    public PermissionUtils(Context context, Callback callback, Activity activity) {
         this.context = context;
         this.callback = callback;
         this.activity = activity;

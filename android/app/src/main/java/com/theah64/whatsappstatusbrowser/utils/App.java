@@ -10,12 +10,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
-import com.theah64.bugmailer.core.BugMailer;
-import com.theah64.bugmailer.core.BugMailerConfig;
-import com.theah64.bugmailer.exceptions.BugMailerException;
 import com.theah64.whatsappstatusbrowser.R;
 
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
 
 /**
  * Created by theapache64 on 16/7/17.
@@ -53,18 +52,13 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         initImageLoader(this);
-
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/Roboto_Regular.ttf")
-                .setFontAttrId(R.attr.fontPath)
-                .build()
-        );
-
-        try {
-            BugMailer.init(this, new BugMailerConfig("theapache64@gmail.com"));
-        } catch (BugMailerException e) {
-            e.printStackTrace();
-        }
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("fonts/Roboto_Regular.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
     }
 
 }

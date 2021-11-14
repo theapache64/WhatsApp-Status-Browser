@@ -1,0 +1,32 @@
+{
+ "added": [
+  {
+   "id": 1,
+   "type": "implementation",
+   "installed_name": "appcompat",
+   "gpm_dep": {
+    "artifact_id": "appcompat-v7",
+    "default_type": "implementation",
+    "docs": "https://mvnrepository.com/artifact/com.android.support/appcompat-v7",
+    "get_from": "Google",
+    "group_id": "com.android.support",
+    "name": "Android AppCompat Library V7",
+    "description": "The Support Library is a static library that you can add to your Android application in order to use APIs that are either not available for older platform versions or utility APIs that aren't a part of the framework APIs. Compatible on devices running API 14 or later."
+   }
+  },
+  {
+   "id": 2,
+   "type": "implementation",
+   "installed_name": "appcompat",
+   "gpm_dep": {
+    "artifact_id": "appcompat",
+    "default_type": "implementation",
+    "docs": "https://mvnrepository.com/artifact/androidx.appcompat/appcompat",
+    "get_from": "Google",
+    "group_id": "androidx.appcompat",
+    "name": "Android AppCompat Library",
+    "description": "The Support Library is a static library that you can add to your Android application in order to use APIs that are either not available for older platform versions or utility APIs that aren't a part of the framework APIs. Compatible on devices running API 14 or later."
+   }
+  }
+ ]
+}

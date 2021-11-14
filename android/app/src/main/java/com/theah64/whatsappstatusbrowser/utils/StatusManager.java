@@ -116,11 +116,11 @@ public class StatusManager {
         }
     }
 
-    private void onFailedOnUI(String reason) {
+    private void onFailedOnUI(final String reason) {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                callback.onFailed("No status found");
+                callback.onFailed(reason);
             }
         });
     }

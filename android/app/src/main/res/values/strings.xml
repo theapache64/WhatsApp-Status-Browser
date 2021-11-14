@@ -10,4 +10,5 @@
     <string name="Loading">Loading…</string>
     <string name="About">About</string>
     <string name="No_viewer_found">No viewer found</string>
+    <string name="main_ins">Long press to share!</string>
 </resources>
