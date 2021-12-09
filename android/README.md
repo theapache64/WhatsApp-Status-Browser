@@ -1,9 +1,9 @@
-![Cover](https://raw.githubusercontent.com/theapache64/WhatsApp-Status-Browser/master/extras/cover.jpg "WhatsApp-Status-Browser")
+![Cover](extras/cover.jpg "WhatsApp-Status-Browser")
 
 # WhatsApp-Status-Browser
 A simple android application to save your friends' WhatsApp status to your gallery
 
-![Screenshot 1](https://raw.githubusercontent.com/theapache64/WhatsApp-Status-Browser/master/extras/screenshots_2.jpg "Screenshot 1")
+![Screenshot 1](extras/screenshots_2.jpg "Screenshot 1")
 
 License
 -------
